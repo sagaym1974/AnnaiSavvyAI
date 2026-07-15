@@ -1,172 +1,356 @@
-import pandas as pd
-
-
 class KPIEngine:
 
     def generate(self, workbook):
 
         kpis = []
 
-        for sheet in workbook["worksheets"]:
+        domain = workbook.get(
+            "domain",
+            {}
+        ).get(
+            "name",
+            "General"
+        )
 
-            sheet_name = sheet["sheet_name"]
+        business_health = workbook.get(
+            "business_health",
+            {}
+        )
 
-            sample = sheet["sample_data"]
+        # --------------------------------------------------
+        # Executive KPIs
+        # --------------------------------------------------
 
-            df = pd.DataFrame(sample)
+        kpis.append({
 
-            kpis.extend(
+            "sheet": "Executive",
 
-                self.basic_kpis(sheet)
+            "title": "Business Health",
+
+            "subtitle": "Overall",
+
+            "icon": "🟢",
+
+            "priority": 0,
+
+            "value": business_health.get(
+                "health_score",
+                0
+            ),
+
+            "column": "health_score",
+
+            "business_name": "Business Health"
+
+        })
+
+        kpis.append({
+
+            "sheet": "Executive",
+
+            "title": "AI Confidence",
+
+            "subtitle": "Confidence",
+
+            "icon": "🤖",
+
+            "priority": 0,
+
+            "value": business_health.get(
+                "confidence_score",
+                0
+            ),
+
+            "column": "confidence_score",
+
+            "business_name": "AI Confidence"
+
+        })
+
+        # --------------------------------------------------
+        # Worksheet KPIs
+        # --------------------------------------------------
+
+        for sheet in workbook.get(
+
+            "worksheets",
+
+            []
+
+        ):
+
+            meanings = sheet.get(
+
+                "business_meaning",
+
+                {}
 
             )
 
-            kpis.extend(
+            for column, info in meanings.items():
 
-                self.sales_kpis(sheet_name, df)
+                if info.get(
+
+                    "business_category"
+
+                ) != "Measure":
+
+                    continue
+
+                stats = info.get(
+
+                    "statistics",
+
+                    {}
+
+                )
+
+                display = info.get(
+
+                    "display_name",
+
+                    column
+
+                )
+
+                metric = info.get(
+
+                    "business_name",
+
+                    column
+
+                )
+
+                base = display.replace(
+
+                    "Total ",
+
+                    ""
+
+                )
+
+                kpis.append({
+
+                    "sheet": sheet["sheet_name"],
+
+                    "title": display,
+
+                    "subtitle": "Total",
+
+                    "icon": "💰",
+
+                    "priority": 1,
+
+                    "value": round(
+
+                        stats.get(
+
+                            "sum",
+
+                            0
+
+                        ),
+
+                        2
+
+                    ),
+
+                    "column": column,
+
+                    "business_name": metric
+
+                })
+
+                kpis.append({
+
+                    "sheet": sheet["sheet_name"],
+
+                    "title": f"Average {base}",
+
+                    "subtitle": "Average",
+
+                    "icon": "📊",
+
+                    "priority": 2,
+
+                    "value": round(
+
+                        stats.get(
+
+                            "average",
+
+                            0
+
+                        ),
+
+                        2
+
+                    ),
+
+                    "column": column,
+
+                    "business_name": metric
+
+                })
+
+                kpis.append({
+
+                    "sheet": sheet["sheet_name"],
+
+                    "title": f"Highest {base}",
+
+                    "subtitle": "Maximum",
+
+                    "icon": "📈",
+
+                    "priority": 3,
+
+                    "value": round(
+
+                        stats.get(
+
+                            "maximum",
+
+                            0
+
+                        ),
+
+                        2
+
+                    ),
+
+                    "column": column,
+
+                    "business_name": metric
+
+                })
+
+                kpis.append({
+
+                    "sheet": sheet["sheet_name"],
+
+                    "title": f"Lowest {base}",
+
+                    "subtitle": "Minimum",
+
+                    "icon": "📉",
+
+                    "priority": 4,
+
+                    "value": round(
+
+                        stats.get(
+
+                            "minimum",
+
+                            0
+
+                        ),
+
+                        2
+
+                    ),
+
+                    "column": column,
+
+                    "business_name": metric
+
+                })
+
+                kpis.append({
+
+                    "sheet": sheet["sheet_name"],
+
+                    "title": f"Median {base}",
+
+                    "subtitle": "Median",
+
+                    "icon": "📌",
+
+                    "priority": 5,
+
+                    "value": round(
+
+                        stats.get(
+
+                            "median",
+
+                            0
+
+                        ),
+
+                        2
+
+                    ),
+
+                    "column": column,
+
+                    "business_name": metric
+
+                })
+
+                kpis.append({
+
+                    "sheet": sheet["sheet_name"],
+
+                    "title": f"Records",
+
+                    "subtitle": metric,
+
+                    "icon": "📋",
+
+                    "priority": 6,
+
+                    "value": stats.get(
+
+                        "count",
+
+                        0
+
+                    ),
+
+                    "column": column,
+
+                    "business_name": metric
+
+                })
+
+        # --------------------------------------------------
+        # Domain KPI
+        # --------------------------------------------------
+
+        kpis.append({
+
+            "sheet": "Executive",
+
+            "title": "Business Domain",
+
+            "subtitle": domain,
+
+            "icon": "🏢",
+
+            "priority": 99,
+
+            "value": domain,
+
+            "column": "domain",
+
+            "business_name": domain
+
+        })
+
+        workbook["kpis"] = sorted(
+
+            kpis,
+
+            key=lambda x: (
+
+                x["priority"],
+
+                str(x["title"])
 
             )
 
-            kpis.extend(
-
-                self.hr_kpis(sheet_name, df)
-
-            )
-
-        workbook["kpis"] = kpis
+        )
 
         return workbook
-
-    def basic_kpis(self, sheet):
-
-        return [
-
-            {
-
-                "sheet": sheet["sheet_name"],
-
-                "name": "Total Rows",
-
-                "value": sheet["rows"]
-
-            },
-
-            {
-
-                "sheet": sheet["sheet_name"],
-
-                "name": "Total Columns",
-
-                "value": sheet["columns"]
-
-            },
-
-            {
-
-                "sheet": sheet["sheet_name"],
-
-                "name": "Dataset Type",
-
-                "value": sheet["dataset_type"]
-
-            }
-
-        ]
-
-    def sales_kpis(self, sheet_name, df):
-
-        if "Amount" not in df.columns:
-
-            return []
-
-        result = [
-
-            {
-
-                "sheet": sheet_name,
-
-                "name": "Total Sales",
-
-                "value": float(df["Amount"].sum())
-
-            },
-
-            {
-
-                "sheet": sheet_name,
-
-                "name": "Average Sale",
-
-                "value": float(df["Amount"].mean())
-
-            },
-
-            {
-
-                "sheet": sheet_name,
-
-                "name": "Highest Sale",
-
-                "value": float(df["Amount"].max())
-
-            },
-
-            {
-
-                "sheet": sheet_name,
-
-                "name": "Lowest Sale",
-
-                "value": float(df["Amount"].min())
-
-            }
-
-        ]
-
-        if "Qty" in df.columns:
-
-            result.append(
-
-                {
-
-                    "sheet": sheet_name,
-
-                    "name": "Total Quantity",
-
-                    "value": int(df["Qty"].sum())
-
-                }
-
-            )
-
-        return result
-
-    def hr_kpis(self, sheet_name, df):
-
-        if "Department" not in df.columns:
-
-            return []
-
-        return [
-
-            {
-
-                "sheet": sheet_name,
-
-                "name": "Employee Count",
-
-                "value": len(df)
-
-            },
-
-            {
-
-                "sheet": sheet_name,
-
-                "name": "Departments",
-
-                "value": df["Department"].nunique()
-
-            }
-
-        ]

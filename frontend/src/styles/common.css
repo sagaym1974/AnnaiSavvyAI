@@ -1,0 +1,261 @@
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    margin:0;
+
+    font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
+
+    background:#F4F7FC;
+
+    overflow-x:hidden;
+
+}
+
+.app-layout{
+
+    display:flex;
+
+}
+
+/* ===========================
+   Sidebar
+=========================== */
+
+.sidebar{
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    width:220px;
+
+    height:100vh;
+
+    background:#17375E;
+
+    color:white;
+
+    padding:15px;
+
+    box-sizing:border-box;
+
+    overflow-y:auto;
+
+    box-shadow:3px 0 15px rgba(0,0,0,.15);
+
+}
+
+.sidebar-logo{
+
+    text-align:center;
+
+    margin-bottom:18px;
+
+}
+
+.sidebar-logo-image{
+
+    width:40px;
+
+    height:40px;
+
+    object-fit:contain;
+
+    margin-bottom:6px;
+
+}
+
+.sidebar h2{
+
+    margin:0;
+
+    font-size:20px;
+
+    font-weight:700;
+
+}
+
+.sidebar nav{
+
+    margin-top:20px;
+
+}
+
+.menu-button{
+
+    width:100%;
+
+    background:none;
+
+    border:none;
+
+    color:white;
+
+    text-align:left;
+
+    padding:10px 12px;
+
+    margin-bottom:6px;
+
+    border-radius:8px;
+
+    font-size:14px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.menu-button:hover{
+
+    background:#0B5394;
+
+    color:#FFD966;
+
+}
+
+/* ===========================
+   Main Content
+=========================== */
+
+.main-content{
+
+    margin-left:220px;
+
+    width:calc(100% - 220px);
+
+    padding:20px;
+
+    box-sizing:border-box;
+
+}
+
+/* ===========================
+   Header
+=========================== */
+
+.header{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:999;
+
+    background:#0B5394;
+
+    color:white;
+
+    padding:12px 18px;
+
+    border-radius:10px;
+
+    margin-bottom:15px;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
+
+}
+
+.header-container{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+}
+
+.header-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.header-logo{
+
+    width:42px;
+
+    height:42px;
+
+    object-fit:contain;
+
+}
+
+.header h1{
+
+    margin:0;
+
+    font-size:24px;
+
+    font-weight:700;
+
+}
+
+.header p{
+
+    margin:2px 0 0 0;
+
+    font-size:12px;
+
+    opacity:.9;
+
+}
+
+.header-right{
+
+    display:flex;
+
+    gap:8px;
+
+    flex-wrap:wrap;
+
+}
+
+.status-chip{
+
+    background:rgba(255,255,255,.18);
+
+    color:white;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:11px;
+
+    font-weight:600;
+
+}
+
+/* ===========================
+   Footer
+=========================== */
+
+.footer{
+
+    margin-top:25px;
+
+    text-align:center;
+
+    font-size:13px;
+
+    color:#667;
+
+}

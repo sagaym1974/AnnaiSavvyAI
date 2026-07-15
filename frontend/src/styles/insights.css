@@ -1,0 +1,229 @@
+/* =======================================================
+   Executive Summary
+======================================================= */
+
+.summary-card{
+
+    background:#ffffff;
+
+    border-radius:12px;
+
+    padding:18px;
+
+    margin-top:18px;
+
+    margin-bottom:18px;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+}
+
+.summary-card h2{
+
+    color:#0B5394;
+
+    margin:0 0 10px 0;
+
+    font-size:24px;
+
+}
+
+.summary-card p{
+
+    margin:0;
+
+    color:#555;
+
+    line-height:1.6;
+
+    font-size:15px;
+
+}
+
+/* =======================================================
+   Executive Summary Mini Cards
+======================================================= */
+
+.mini-summary-box{
+
+    background:#F7FAFF;
+
+    border:1px solid #D8E6F7;
+
+    border-radius:8px;
+
+    min-width:95px;
+
+    padding:10px;
+
+    text-align:center;
+
+    box-shadow:0 2px 5px rgba(0,0,0,.06);
+
+    transition:.25s;
+
+}
+
+.mini-summary-box:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 5px 12px rgba(0,0,0,.12);
+
+}
+
+.mini-summary-box strong{
+
+    color:#0B5394;
+
+    font-size:12px;
+
+}
+
+.mini-summary-box{
+
+    font-size:13px;
+
+    color:#333;
+
+}
+
+/* =======================================================
+   Executive Intelligence
+======================================================= */
+
+.insight-heading{
+
+    margin-top:20px;
+
+    margin-bottom:15px;
+
+    color:#0B5394;
+
+    font-size:22px;
+
+    font-weight:700;
+
+}
+
+.insight-sheet{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+.insight-card{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:15px;
+
+    background:#ffffff;
+
+    border-radius:10px;
+
+    padding:14px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+    transition:.25s;
+
+}
+
+.insight-card:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 5px 15px rgba(0,0,0,.12);
+
+}
+
+.insight-icon{
+
+    font-size:28px;
+
+    width:45px;
+
+    text-align:center;
+
+}
+
+.insight-content{
+
+    flex:1;
+
+}
+
+.insight-content h4{
+
+    margin:0;
+
+    color:#0B5394;
+
+    font-size:17px;
+
+}
+
+.insight-content small{
+
+    display:block;
+
+    margin-top:4px;
+
+    color:#777;
+
+    font-size:12px;
+
+}
+
+.insight-content p{
+
+    margin-top:8px;
+
+    margin-bottom:0;
+
+    color:#555;
+
+    line-height:1.5;
+
+}
+
+/* =======================================================
+   Severity Colors
+======================================================= */
+
+.insight-card.info{
+
+    border-left:5px solid #1565C0;
+
+}
+
+.insight-card.success{
+
+    border-left:5px solid #43A047;
+
+}
+
+.insight-card.warning{
+
+    border-left:5px solid #FB8C00;
+
+}
+
+.insight-card.danger{
+
+    border-left:5px solid #E53935;
+
+}
+
+.insight-card.critical{
+
+    border-left:5px solid #8E24AA;
+
+}
