@@ -83,13 +83,29 @@ function UploadPanel({ dashboardData, setDashboardData }) {
 
         }
 
-        catch (error) {
+       catch (error) {
 
-            console.log(error);
+    console.log("========== UPLOAD ERROR ==========");
 
-            alert("Upload Failed");
+    console.log(error);
 
-        }
+    console.log("Response:");
+
+    console.log(error.response);
+
+    console.log("Status:");
+
+    console.log(error.response?.status);
+
+    console.log("Data:");
+
+    console.log(error.response?.data);
+
+    console.log("==================================");
+
+    alert("Upload Failed");
+
+}
 
     };
 
