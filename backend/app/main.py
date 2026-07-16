@@ -19,6 +19,8 @@ app = FastAPI(
 
 origins = [
 
+    # Local Development
+
     "http://localhost:5173",
     "http://localhost:5174",
     "http://localhost:5175",
@@ -27,7 +29,15 @@ origins = [
     "http://127.0.0.1:5173",
     "http://127.0.0.1:5174",
     "http://127.0.0.1:5175",
-    "http://127.0.0.1:5176"
+    "http://127.0.0.1:5176",
+
+    # Production (Vercel)
+
+    "https://annai-savvy-2mhfz3f07-annaisavvyai.vercel.app",
+
+    # Optional - Future Vercel Domain
+
+    "https://annai-savvy-ai.vercel.app"
 
 ]
 
