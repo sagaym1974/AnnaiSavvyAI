@@ -37,7 +37,7 @@ origins = [
 
     # Optional - Future Vercel Domain
 
-    "https://annai-savvy-ai.vercel.app"
+    "https://annaisavvyai.vercel.app"
 
 ]
 
